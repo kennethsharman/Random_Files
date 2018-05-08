@@ -46,9 +46,9 @@ def init():
 # animation function.  This is called sequentially
 def animate(i):
     theta = np.arange(0,2.1*np.pi, 0.1)
-    r = np.array([0])*len(theta)+i
+    r = np.array([0])*len(theta)+i[0]
     line.set_data(theta, r)
-    title.set_text (i.__str__())
+    title.set_text (i[1].__str__())
     return line
 
 # call the animator.  blit=True means only re-draw the parts that have changed.
@@ -59,6 +59,5 @@ for msmt in yearly_averages:
     HTML(anim.to_jshtml())
 '''
 anim = animation.FuncAnimation(fig, animate, init_func=init,
-                               frames=yearly_averages, interval=200, 
-                               blit=False, repeat=False)
+                               frames=select_data, interval=200, blit=False, repeat=False)
 HTML(anim.to_jshtml())
