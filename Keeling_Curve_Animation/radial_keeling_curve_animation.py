@@ -2,6 +2,7 @@ import numpy as np
 
 # Retrieve the columns of data in the text file
 # Sourced from: ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2_mm_mlo.txt
+
 filename = 'co2_mm_mlo.txt'
 data = np.genfromtxt( filename, skip_header=72, max_rows=792, usecols=(0,1,2,3,4,5), 
                      names=['year', 'month', 'ddate', 'average','interpolated', 'trend'] )
