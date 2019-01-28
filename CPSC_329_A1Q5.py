@@ -43,3 +43,40 @@ print('First password found with hash value equal to h(7819)', working_pswd_list
 print('Number of Passwords with hash value equal to h(7819) =', len(working_pswd_list))
 print('Probability of Guessing =', 100*len(working_pswd_list)/10000.0, '%' )
 print(working_pswd_list)
+
+def hash2(salt, num):
+    '''
+    Function implements hash function (with salt) defined in assignment
+    Parameters
+        salt: hashing salt
+        num: password to be hashed
+    Returns hashed value of password
+    '''
+    s0, s1 = salt %10, int(salt/10) % 10
+    a0 = num % 10
+    a1 = int(num/10) % 10
+    a2 = int(num/10**2) % 10
+    a3 = int(num/10**3) % 10
+    
+    return (10*s1 + s0 + a3**4 + a2**3 + a1**2 + a0) % 100
+
+user_password2 = 7819
+salt = 39
+
+accepted_hash2 = hash2(salt, user_password2)
+print('Software is looking for hash value =', accepted_hash2)
+
+password2 = 0 # start with password 0000
+# array to store passwords with matching hashes
+working_pswd_list2 = np.array([])
+
+while password2 < 10000:
+    current_hash2 = hash2(salt, password2)
+    if current_hash2 == accepted_hash2:
+        working_pswd_list2 = np.append(working_pswd_list2, password2)
+        password2 += 1
+    else: password2 += 1
+    
+print('Number of Possible Successful Hashes =', len(working_pswd_list2))
+print('Probability of Guessing =', \
+      100*len(working_pswd_list2)/((2**len(str(salt)))*10000.0), '%' )
