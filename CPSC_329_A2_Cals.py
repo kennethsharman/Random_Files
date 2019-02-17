@@ -67,3 +67,25 @@ print('Probability of correctly responding to all 20 challenges %.3e' % prob2)
 
 percent_prob2 = prob2 * 100.0
 print('%.3e' % percent_prob2, '%')
+
+# Question 3
+
+def hexxor(a, b):
+    '''
+    Function returns XOR operation done on 2 strings, assumed to be in hex format
+    '''
+    return "".join(["%x" % (int(x,16) ^ int(y,16)) for (x, y) in zip(a, b)])
+
+y = '3344ffac'
+z = '1100dd0d'
+s = hexxor(y,z)
+print('secret key = ' + s)
+
+# Challenge x
+x = z
+print('Challenge =', x)
+transmitted = hexxor(x,s)
+print('Transmitted Value =', transmitted)
+response = hexxor(transmitted, s)
+print('Response, z =', response)
+print('Challenge == Response:', x == response)
