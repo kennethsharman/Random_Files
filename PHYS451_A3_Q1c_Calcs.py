@@ -1,5 +1,6 @@
 '''
-Phys 451 - Assignment 3 Question
+Phys 451 - Assignment 3
+Questions 9.9 and 9.10 from Statistical and Thermal Physics, H. Gould
 Feb 19, 2019
 '''
 
