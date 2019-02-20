@@ -1,5 +1,5 @@
 '''
-Phys 451 - Assignment 3 Question 9.19 Calculations
+Phys 451 - Assignment 3 Question
 Feb 19, 2019
 '''
 
@@ -7,6 +7,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 import pandas as pd
+
+# 9.19 Calculations
 
 # import data
 xdata = pd.read_csv('xdata.csv')
@@ -54,5 +56,58 @@ frame.set_alpha(0.6)
 plt.savefig('LogPlot.png')
 plt.show()
 
-print(popt)
-print(popt1)
+print('Calculated Coefficients for Fit to All Data, (A,t):\n\t', popt)
+print('Calculated Coefficients for Fit Omitting First 10 Data Points, (A,t):\n\t', popt1)
+
+# 9.10 Calculations
+
+L1 = [10,20,40,80]
+Pinf = [0.49, 0.41, 0.358, 0.307]
+
+def power1(L, A, greek):
+    '''
+    Pinfty power law
+    '''
+    return A*L**(-greek)
+
+ax = plt.figure(figsize=(15,7)) # Set the plot size
+
+# Label Plot
+plt.xlabel("Lattice Size, $L$ ()", fontsize='x-large')
+plt.ylabel("Order Parameter, $P_\infty$ ()", fontsize='x-large')
+plt.title("Power Law Relationship between Order Parameter and Lattice Size", fontsize='xx-large')
+
+plt.scatter(L1, Pinf, marker='*', c='r')
+
+popt, pcov = curve_fit(power1, L1, Pinf)
+plt.loglog(L1, power1(L1, *popt)) #, lw=5, ls='--', c='r'
+
+plt.savefig('Pinfty.png')
+plt.show()
+
+print('Calculated Coefficients, (A, greek):\n\t', popt)
+
+S = [13.907, 38.478, 154.364, 443.088]
+
+def power2(L, A, greek):
+    '''
+    S power law
+    '''
+    return A*L**(greek)
+
+ax = plt.figure(figsize=(15,7)) # Set the plot size
+
+# Label Plot
+plt.xlabel("Lattice Size, $L$ ()", fontsize='x-large')
+plt.ylabel("Mean Size of Finite Clusters, $S$ ()", fontsize='x-large')
+plt.title("Power Law Relationship between Finite Cluster and Lattice Sizes", fontsize='xx-large')
+
+plt.scatter(L1, S, marker='*', c='r')
+
+popt, pcov = curve_fit(power2, L1, S)
+plt.loglog(L1, power2(L1, *popt))
+
+plt.savefig('S.png')
+plt.show()
+
+print('Calculated Coefficients, (A, greek):\n\t', popt)
