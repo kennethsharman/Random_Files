@@ -60,6 +60,58 @@ plt.show()
 print('Calculated Coefficients for Fit to All Data, (A,t):\n\t', popt)
 print('Calculated Coefficients for Fit Omitting First 10 Data Points, (A,t):\n\t', popt1)
 
+# import data which was saved as 2 csv files
+x1data = pd.read_csv('pinfx.csv') # p-p_c for p in [.57,0.61]
+y1data = pd.read_csv('pinfy.csv') # Pinfty(p) - order parameter
+
+# Isolate floating point #'s
+x1data = x1data.values
+y1data = y1data.values
+
+# Convert #'s to list
+x1_s = [x[0] for x in x1data]
+y1_s = [y[0] for y in y1data]
+
+ax = plt.figure(figsize=(15,7)) # Set the plot size
+
+# Label Plot
+plt.xlabel("$p-p_c$ ()", fontsize='xx-large')
+plt.ylabel("$P_\infty(p)$ ()", fontsize='xx-large')
+plt.title("Behavior of Order Parameter $P_\infty$ close to critical point, $L=128$",\
+          fontsize='xx-large')
+plt.grid(linestyle='dashed') # Add grid to graph
+
+plt.loglog(x1_s, y1_s) # plot Pinf versus p-p_c
+
+plt.savefig('Pinf.png') # save plot as png file
+plt.show()
+
+# import data which was saved as 2 csv files
+x2data = pd.read_csv('Sdatax.csv') # |p-p_c| for p in [.57,0.61]
+y2data = pd.read_csv('Sdatay.csv') # S(p) - mean cluster size
+
+# Isolate floating point #'s
+x2data = x2data.values
+y2data = y2data.values
+
+# Convert #'s to list
+x2_s = [x[0] for x in x2data]
+y2_s = [y[0] for y in y2data]
+
+ax = plt.figure(figsize=(15,7)) # Set the plot size
+
+# Label Plot
+plt.xlabel("$|p-p_c|$ ()", fontsize='xx-large')
+plt.ylabel("$S(p)$ ()", fontsize='xx-large')
+plt.title("Behavior of Mean Cluster Size close to critical point, $L=128$",\
+          fontsize='xx-large')
+plt.grid(linestyle='dashed') # Add grid to graph
+
+plt.loglog(x2_s, y2_s) # plot Pinf versus p-p_c
+
+plt.savefig('Sdata.png') # save plot as png file
+plt.show()
+
 # 9.10 Calculations
 
 L1 = [10,20,40,80]
