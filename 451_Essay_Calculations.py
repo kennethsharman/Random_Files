@@ -26,7 +26,7 @@ plt.yticks(fontsize=14)
 plt.xticks(fontsize=14)
 
 ax.plot(dates,closes)
-#plt.savefig('time_series.png')
+plt.savefig('time_series.png')
 plt.show()
 
 # Typecast pandas dataframe to numpy array
